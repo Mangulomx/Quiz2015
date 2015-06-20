@@ -9,8 +9,8 @@ header,nav,section,footer{
 }
 #img_author
 {
-	width:50%;
-	height:50%;
+	max-width: 250px;
+	max-height: 70px;
 }
 nav span{
 	margin:0px 10px 0px 0px;
