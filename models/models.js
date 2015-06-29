@@ -8,9 +8,9 @@ var sequelize = new Sequelize(null, null, null, {dialect:"sqlite", storage:"quiz
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
 exports.Quiz = Quiz; //exporta la definición de la tabla Quiz
 //sequelize.syncr() crea e inicializa la tabla de preguntas en la DB
-sequelize.sync().success(function(){
+sequelize.sync().then(function(){
 	//success(..) ejecuta el manejador una vez creada la tabla
-	Quiz.count().sucess(function(count)
+	Quiz.count().then(function(count)
 	{
 		if(count === 0) //La tabla se inicializa si esta vacia
 		{
@@ -19,7 +19,7 @@ sequelize.sync().success(function(){
 				pregunta: 'Capital de Italia',
 				respuesta: 'Roma'
 			})
-			.success(function()
+			.then(function()
 			{
 				console.log('Base de datos inicializada');
 			});
