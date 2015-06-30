@@ -28,9 +28,3 @@ exports.answer = function(req, res)
 	})
 };
 
-//GET /author
-
-exports.author = function(req, res)
-{
-	res.render('author', {name: 'Miguel Angulo Martinez', images: 'foto.jpeg'});
-};

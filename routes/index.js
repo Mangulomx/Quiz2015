@@ -5,8 +5,11 @@ var quizController = require('../controllers/quiz_controller');
 router.get('/', function(req, res) {
   res.render('index', { title: "Quiz" });
 });
-
+/* GET authors */
+router.get('/author', function(req, res)
+{
+	res.render('author', {name: 'Miguel Angulo Martinez', images: 'foto.jpeg'});
+});
 router.get('/quizes/question', quizController.question);
 router.get('/quizes/answer', quizController.answer);
-router.get('/author', quizController.author);
 module.exports = router;
