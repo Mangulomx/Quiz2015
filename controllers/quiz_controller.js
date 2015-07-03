@@ -25,7 +25,21 @@ exports.load = function(req, res, next, quizId)
 
 exports.index = function(req, res)
 {
-	models.Quiz.findAll().then(function(quizes)
+	//Defino un objeto vacio en caso de que el usuario no hago ninguna busqueda
+	var query={};
+	console.log("request"+req.query.search);
+	//si el usuario realizo una busqueda compongo el query
+	if(req.query.search===undefined)
+	{
+		query ={order: 'pregunta ASC'};
+	}
+	else
+	{
+		var search = '%'+req.query.search.replace(/\s+/g,'%')+'%';
+		query = {where:["pregunta like?", search], order:'pregunta ASC'};
+		console.log("hola"+query);
+	}
+	models.Quiz.findAll(query).then(function(quizes)
 	{
 		res.render('quizes/index.ejs', {quizes: quizes});
 	}).catch(function(error){ next(error);})
