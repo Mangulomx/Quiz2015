@@ -84,8 +84,7 @@ exports.new = function(req, res)
 
 exports.create = function(req, res)
 {
-	var quiz = models.Quiz.build(req.body.quiz);
-	console.log("quiz"+quiz);
+	var quiz = models.Quiz.build( req.body.quiz );
 	//Guardar en la DB los campos pregunta y respuesta de quiz
 	quiz
 	.validate()
@@ -101,7 +100,7 @@ exports.create = function(req, res)
 				//save: guarda en DB campos preguntas y respuesta de quiz
 				quiz.save({fields: ["pregunta","respuesta"]}).then(function()
 				{
-					res.redirect('/quizes'); //Redirect http(url relativo) lista de preguntas.
+					res.redirect('/quizes') //Redirect http(url relativo) lista de preguntas.
 				})
 			}
 		}
