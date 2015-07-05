@@ -15,6 +15,11 @@ header,nav,section,footer{
 nav span{
 	margin:0px 10px 0px 0px;
 }
+#ErrorMgs
+{
+	color: #f61;
+	font-size: smaller;
+}
 fieldset
 {
 	margin-bottom: 10px;
