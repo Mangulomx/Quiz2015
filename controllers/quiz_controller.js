@@ -75,9 +75,9 @@ exports.new = function(req, res)
 {
 	var quiz = models.Quiz.build(
 		//Crea objeto
-		{pregunta:"Pregunta", respuesta:"Respuesta"}
+		{pregunta:"Pregunta", respuesta:"Respuesta", tema:"Tema"}
 	);
-	res.render('quizes/new', {quiz: quiz, errors: []});
+	res.render('quizes/new', {temas: models.Quiz.rawAttributes.tema.values, quiz: quiz, errors: []});
 };
 
 //POST /quizes/create
@@ -98,7 +98,7 @@ exports.create = function(req, res)
 			else
 			{
 				//save: guarda en DB campos preguntas y respuesta de quiz
-				quiz.save({fields: ["pregunta","respuesta"]}).then(function()
+				quiz.save({fields: ["pregunta","respuesta","tema"]}).then(function()
 				{
 					res.redirect('/quizes') //Redirect http(url relativo) lista de preguntas.
 				})
@@ -112,7 +112,7 @@ exports.create = function(req, res)
 exports.edit = function(req, res)
 {
 	var quiz = req.quiz; //autoload de instancia quiz
-	res.render('quizes/edit', { quiz: quiz, errors:[] })
+	res.render('quizes/edit', {temas: models.Quiz.rawAttributes.tema.values, quiz: quiz, errors:[] })
 }
 
 //PUT /quizes/:id
@@ -121,6 +121,7 @@ exports.update = function(req, res)
 {
 	req.quiz.pregunta = req.body.quiz.pregunta;
 	req.quiz.respuesta = req.body.quiz.respuesta;
+	req.quiz.tema = req.body.quiz.tema;
 
 	req.quiz
 	.validate()
@@ -134,7 +135,7 @@ exports.update = function(req, res)
 		{
 			//save: guarda campos pregunta y respuesta en DB
 			req.quiz
-			.save({fields:["pregunta","respuesta"]})
+			.save({fields:["pregunta","respuesta","tema"]})
 			.then(function(){res.redirect('/quizes');});
 			//Redirect HTTP a la lista de preguntas (URL relativo)
 		}
