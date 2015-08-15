@@ -3,6 +3,7 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
+var statsController = require('../controllers/statics_controller');
 // Página de entrada (home page)
 router.get('/', function(req, res) {
   res.render('index', { title: "Quiz", errors: [] });
@@ -14,6 +15,10 @@ router.get('/author', function(req, res)
 	res.render('author', 
 		{name: 'Miguel Angulo Martinez', images: 'foto.jpeg', errors: []});
 });
+
+//Definicion de la ruta de estadisticas
+
+router.get('/quizes/statistics', statsController.results);
 // Autoload de comandos con :quizId
 router.param('quizId', quizController.load); //autoload :quizId
 router.param('commentId', commentController.load); //autoload :commentId
